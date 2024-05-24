@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="post" id="empData">
+        <label for="">name</label>
+        <input type="text" id="name"> <br><br>
+        <label for="">email</label>
+        <input type="email" id="email"><br><br>
+        <label for="">age</label>
+        <input type="number" id="age"><br><br>
+        <label for="">designation</label>
+        <input type="text" id="designation"><br><br>
+        <input type="submit" value="Add Student">
+
+    </form>
+
+    <script>
+        let empData = document.getElementById('empData');
+
+
+        empData.onsubmit = (e) => {
+         
+            e.preventDefault();
+            let name = document.getElementById("name").value; 
+            let email = document.getElementById("email").value;
+            let age = document.getElementById("age").value;
+            let designation = document.getElementById("designation").value;
+            let data = {
+                "name": name,
+                "email": email,
+                "age": age,
+                "designation": designation
+            }
+
+            console.log(data);
+            //convert to json
+            let jsonData = JSON.stringify(data);
+
+            fetch('http://localhost:3000/employee',
+                {
+                    method: "POST",
+                    headers:{
+                        'Content-Type': 'application/json'
+                    },
+                    body:jsonData
+                }
+
+            )
+
+        }
+
+
+    </script>
+</body>
+</html>
